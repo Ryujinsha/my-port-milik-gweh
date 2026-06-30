@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+/* ===========================
+   Custom Theme (Tailwind v4)
+   =========================== */
+@theme {
+  /* Color Palette */
+  --color-primary: #121358;
+  --color-secondary: #232F72;
+  --color-surface: #2F578A;
+  --color-accent: #36ADA3;
+  --color-accent-light: #4ECDC4;
+  --color-neutral-white: #FFFFFF;
+  --color-neutral-light: #F1F5F9;
+  --color-neutral-gray: #94A3B8;
+  --color-neutral-dark: #1E293B;
+  --color-neutral-darker: #0F172A;
+
+  /* Font Family */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* Animation Durations */
+  --animate-duration-fast: 0.3s;
+  --animate-duration-normal: 0.5s;
+  --animate-duration-slow: 0.8s;
+}
+
+/* ===========================
+   Base Styles
+   =========================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 15;
+  padding: 10;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-neutral-darker);
+  color: var(--color-neutral-white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-neutral-white);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-neutral-darker);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* ===========================
+   Utility Classes
+   =========================== */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glow-accent {
+  box-shadow:
+    0 0 20px rgba(54, 173, 163, 0.3),
+    0 0 60px rgba(54, 173, 163, 0.1);
+}
+
+.glow-accent-strong {
+  box-shadow:
+    0 0 30px rgba(54, 173, 163, 0.4),
+    0 0 80px rgba(54, 173, 163, 0.15);
+}
+
+.glass {
+  background: rgba(18, 19, 88, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(54, 173, 163, 0.1);
+}
+
+.glass-surface {
+  background: rgba(47, 87, 138, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
