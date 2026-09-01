@@ -5,11 +5,11 @@
    =========================== */
 @theme {
   /* Color Palette */
-  --color-primary: #121358;
-  --color-secondary: #232F72;
-  --color-surface: #2F578A;
-  --color-accent: #36ADA3;
-  --color-accent-light: #4ECDC4;
+  --color-primary: #84B179;
+  --color-secondary: #A2CB8B;
+  --color-surface: #C7EABB;
+  --color-accent: #E8F5BD;
+  --color-accent-light: #E8F5BD;
   --color-neutral-white: #FFFFFF;
   --color-neutral-light: #F1F5F9;
   --color-neutral-gray: #94A3B8;
@@ -85,25 +85,25 @@ body {
 
 .glow-accent {
   box-shadow:
-    0 0 20px rgba(54, 173, 163, 0.3),
-    0 0 60px rgba(54, 173, 163, 0.1);
+    0 0 20px rgba(232, 245, 189, 0.3),
+    0 0 60px rgba(232, 245, 189, 0.1);
 }
 
 .glow-accent-strong {
   box-shadow:
-    0 0 30px rgba(54, 173, 163, 0.4),
-    0 0 80px rgba(54, 173, 163, 0.15);
+    0 0 30px rgba(232, 245, 189, 0.4),
+    0 0 80px rgba(232, 245, 189, 0.15);
 }
 
 .glass {
-  background: rgba(18, 19, 88, 0.6);
+  background: rgba(132, 177, 121, 0.6);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(54, 173, 163, 0.1);
+  border: 1px solid rgba(232, 245, 189, 0.1);
 }
 
 .glass-surface {
-  background: rgba(47, 87, 138, 0.2);
+  background: rgba(199, 234, 187, 0.2);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.08);
