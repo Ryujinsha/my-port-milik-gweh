@@ -102,7 +102,7 @@ export default function Chatbot({ isOpen, onClose }) {
             className="fixed bottom-4 right-4 z-[70] flex h-[min(600px,85vh)] w-[min(420px,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-white/10 bg-neutral-darker shadow-2xl shadow-black/40"
           >
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-white/10 bg-primary/80 px-4 py-3">
+            <div className="flex items-center justify-between border-b border-white/10 px-4 py-3" style={{ backgroundColor: 'var(--bg-card)' }}>
               <div className="flex items-center gap-3">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent text-sm font-bold text-white">
                   <HiSparkles size={18} />

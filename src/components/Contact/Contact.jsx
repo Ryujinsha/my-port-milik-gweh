@@ -77,7 +77,7 @@ export default function Contact() {
 
       <Container>
         <SectionTitle
-          title="Get In Touch"
+          title="Let's Get In Touch"
           subtitle="Contact"
         />
 

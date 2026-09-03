@@ -1,20 +1,48 @@
 @import "tailwindcss";
 
 /* ===========================
+   Firefly Theme — Global CSS Variables
+   =========================== */
+:root {
+  /* Dark Slate / Backgrounds */
+  --bg-main: #1e242b;
+  --bg-card: #272f38;
+  --bg-card-hover: #313b46;
+
+  /* Text & Typography */
+  --text-primary: #f4f6f8;
+  --text-secondary: #a0aec0;
+
+  /* Firefly Signature Accents */
+  --accent-teal: #3da49e;
+  --accent-teal-hover: #328984;
+  --accent-blue: #89a3e0;
+  --accent-pink: #f3a8bd;
+
+  /* UI Borders & Shadows */
+  --border-color: #36414e;
+  --glow-shadow: 0 0 15px rgba(61, 164, 158, 0.3);
+}
+
+/* ===========================
    Custom Theme (Tailwind v4)
    =========================== */
 @theme {
-  /* Color Palette */
-  --color-primary: #84B179;
-  --color-secondary: #A2CB8B;
-  --color-surface: #C7EABB;
-  --color-accent: #E8F5BD;
-  --color-accent-light: #E8F5BD;
-  --color-neutral-white: #FFFFFF;
-  --color-neutral-light: #F1F5F9;
-  --color-neutral-gray: #94A3B8;
-  --color-neutral-dark: #1E293B;
-  --color-neutral-darker: #0F172A;
+  /* Color Palette — mapped from Firefly :root */
+  --color-primary: var(--accent-teal-hover);
+  --color-secondary: var(--accent-blue);
+  --color-surface: var(--accent-pink);
+  --color-accent: var(--accent-teal);
+  --color-accent-light: var(--accent-blue);
+  --color-accent-pink: var(--accent-pink);
+  --color-neutral-white: var(--text-primary);
+  --color-neutral-light: var(--text-secondary);
+  --color-neutral-gray: var(--text-secondary);
+  --color-neutral-dark: var(--bg-card);
+  --color-neutral-darker: var(--bg-main);
+  --color-card: var(--bg-card);
+  --color-card-hover: var(--bg-card-hover);
+  --color-border: var(--border-color);
 
   /* Font Family */
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
@@ -28,14 +56,6 @@
 /* ===========================
    Base Styles
    =========================== */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 15;
-  padding: 10;
-}
-
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
@@ -44,15 +64,15 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-neutral-darker);
-  color: var(--color-neutral-white);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
 }
 
 ::selection {
-  background-color: var(--color-accent);
-  color: var(--color-neutral-white);
+  background-color: var(--accent-teal);
+  color: var(--text-primary);
 }
 
 /* Scrollbar Styling */
@@ -61,23 +81,30 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-neutral-darker);
+  background: var(--bg-main);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-surface);
+  background: var(--border-color);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent);
+  background: var(--accent-teal);
 }
 
 /* ===========================
    Utility Classes
    =========================== */
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+  background: linear-gradient(135deg, var(--accent-teal) 0%, var(--accent-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-pink {
+  background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-blue) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -85,26 +112,32 @@ body {
 
 .glow-accent {
   box-shadow:
-    0 0 20px rgba(232, 245, 189, 0.3),
-    0 0 60px rgba(232, 245, 189, 0.1);
+    0 0 20px rgba(61, 164, 158, 0.3),
+    0 0 60px rgba(61, 164, 158, 0.1);
 }
 
 .glow-accent-strong {
   box-shadow:
-    0 0 30px rgba(232, 245, 189, 0.4),
-    0 0 80px rgba(232, 245, 189, 0.15);
+    0 0 30px rgba(61, 164, 158, 0.4),
+    0 0 80px rgba(61, 164, 158, 0.15);
+}
+
+.glow-pink {
+  box-shadow:
+    0 0 20px rgba(243, 168, 189, 0.3),
+    0 0 60px rgba(243, 168, 189, 0.1);
 }
 
 .glass {
-  background: rgba(132, 177, 121, 0.6);
+  background: rgba(39, 47, 56, 0.8);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(232, 245, 189, 0.1);
+  border: 1px solid rgba(54, 65, 78, 0.6);
 }
 
 .glass-surface {
-  background: rgba(199, 234, 187, 0.2);
+  background: rgba(39, 47, 56, 0.5);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(54, 65, 78, 0.4);
 }

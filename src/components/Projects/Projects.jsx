@@ -50,10 +50,10 @@ function ProjectCard({ project, index, progress, total }) {
         opacity,
         zIndex,
       }}
-      className="absolute top-0 left-0 right-0 mx-auto w-full max-w-md group overflow-hidden rounded-2xl border border-white/10 bg-neutral-darker/90 backdrop-blur-md shadow-2xl transition-colors duration-500 hover:border-accent/50"
+      className="absolute top-0 left-0 right-0 mx-auto w-full max-w-2xl group overflow-hidden rounded-2xl border border-white/10 bg-neutral-darker/90 backdrop-blur-md shadow-2xl transition-colors duration-500 hover:border-accent/50"
     >
       {/* Thumbnail area */}
-      <div className="relative h-56 w-full overflow-hidden">
+      <div className="relative h-64 w-full overflow-hidden">
         <div
           className="absolute inset-0 transition-transform duration-500 group-hover:scale-110"
           style={{
@@ -149,12 +149,12 @@ export default function Projects() {
       <div className="sticky top-0 h-screen w-full flex flex-col overflow-hidden py-24">
         {/* Background decoration */}
         <div className="absolute inset-0 -z-10">
-          <div className="absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-surface/5 blur-[150px]" />
+          <div className="absolute top-1/2 left-1/2 h-[900px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-surface/5 blur-[150px]" />
         </div>
 
         <Container className="flex h-full flex-col">
           <SectionTitle
-            title="Featured Projects"
+            title="My Project Gw"
             subtitle="My Work"
           />
 

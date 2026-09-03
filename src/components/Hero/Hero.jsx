@@ -7,7 +7,7 @@ import { PERSONAL_INFO } from '../../utils/data';
 import { fadeUp, staggerContainer, floatingAnimation } from '../../utils/animations';
 
 /* Titles to cycle through in the typing effect */
-const TITLES = ['Frontend Developer', 'UI/UX Enthusiast', 'React Specialist', 'Web Developer'];
+const TITLES = ['Frontend Developer', 'UI/UX Enthusiast', 'Tech Entusiast', 'Web Developer'];
 
 /**
  * Hero section with typing effect, stagger animations, and floating illustration.
@@ -140,33 +140,36 @@ export default function Hero({ scrollTo }) {
               {/* Glow ring */}
               <div className="absolute inset-0 -m-6 rounded-full bg-gradient-to-br from-accent/20 via-surface/10 to-secondary/20 blur-2xl" />
 
-              {/* Floating avatar placeholder */}
+              {/* Floating character */}
               <motion.div
                 animate={floatingAnimation}
                 className="relative"
               >
+                {/* Circle background frame */}
                 <div className="relative h-64 w-64 overflow-hidden rounded-full border-2 border-accent/20 sm:h-80 sm:w-80 lg:h-96 lg:w-96">
-                  {/* Abstract geometric illustration */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-surface">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="relative">
-                        {/* Geometric shapes */}
-                        <div className="absolute -left-8 -top-8 h-20 w-20 rotate-45 rounded-lg border-2 border-accent/30 bg-accent/10" />
-                        <div className="absolute -right-6 -bottom-4 h-16 w-16 rounded-full border-2 border-accent/20 bg-surface/30" />
-                        <div className="absolute -bottom-8 -left-4 h-12 w-12 rotate-12 border-2 border-accent/25 bg-secondary/40" />
-                        <span className="text-7xl font-extrabold text-accent/80 sm:text-8xl lg:text-9xl">
-                          {PERSONAL_INFO.firstName[0]}
-                          {PERSONAL_INFO.name.split(' ')[1]?.[0] || ''}
-                        </span>
-                      </div>
-                    </div>
+                  {/* Gradient circle background */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-surface" />
+                </div>
+
+                {/* Character image — positioned over the circle, extending upward */}
+                <div className="absolute inset-0 flex items-end justify-center overflow-visible">
+                  <div className="relative w-[110%] sm:w-[105%]" style={{ marginBottom: '-8%' }}>
+                    <img
+                      src="/MBG.png"
+                      alt="Firefly Character"
+                      className="w-full h-auto object-contain drop-shadow-[0_0_30px_rgba(61,164,158,0.3)]"
+                      style={{
+                        maskImage: 'linear-gradient(to bottom, black 55%, transparent 98%)',
+                        WebkitMaskImage: 'linear-gradient(to bottom, black 55%, transparent 98%)',
+                      }}
+                    />
                   </div>
                 </div>
 
                 {/* Decorative orbiting dots */}
-                <div className="absolute -right-3 top-8 h-4 w-4 rounded-full bg-accent shadow-[0_0_12px_rgba(54,173,163,0.6)]" />
-                <div className="absolute -left-2 bottom-12 h-3 w-3 rounded-full bg-surface shadow-[0_0_10px_rgba(47,87,138,0.6)]" />
-                <div className="absolute -bottom-2 right-12 h-2.5 w-2.5 rounded-full bg-secondary shadow-[0_0_8px_rgba(35,47,114,0.6)]" />
+                <div className="absolute -right-3 top-8 h-4 w-4 rounded-full bg-accent shadow-[0_0_12px_rgba(61,164,158,0.6)]" />
+                <div className="absolute -left-2 bottom-12 h-3 w-3 rounded-full bg-surface shadow-[0_0_10px_rgba(137,163,224,0.6)]" />
+                <div className="absolute -bottom-2 right-12 h-2.5 w-2.5 rounded-full bg-secondary shadow-[0_0_8px_rgba(243,168,189,0.6)]" />
               </motion.div>
             </div>
           </motion.div>
