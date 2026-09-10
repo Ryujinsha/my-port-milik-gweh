@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { HiArrowDown } from 'react-icons/hi';
 import Container from '../Container/Container';
 import Button from '../Button/Button';
@@ -9,6 +9,14 @@ import { fadeUp, staggerContainer, floatingAnimation } from '../../utils/animati
 /* Titles to cycle through in the typing effect */
 const TITLES = ['Frontend Developer', 'UI/UX Enthusiast', 'Tech Entusiast', 'Web Developer'];
 
+const WELCOME_GREETINGS = [
+  "Welcome", // English
+  "Selamat datang", // Indonesian
+  "ようこそ", // Japanese
+  "Willkommen", // German
+  "欢迎", // Chinese
+];
+
 /**
  * Hero section with typing effect, stagger animations, and floating illustration.
  */
@@ -16,6 +24,40 @@ export default function Hero({ scrollTo }) {
   const [titleIndex, setTitleIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+  
+  const [isDesktop, setIsDesktop] = useState(true);
+  useEffect(() => {
+    setIsDesktop(window.innerWidth >= 1024);
+    const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const { scrollY } = useScroll();
+  
+  // Scroll animation phases:
+  // Phase 1 (0-600px): Welcome fades out, Avatar moves from left to center, Text fades in.
+  // Pause (600-800px): Intro stays visible.
+  // Phase 2 (800-1200px): "Opening gate" effect. Text moves left and fades out, Avatar moves right and fades out.
+  const textOpacity = useTransform(scrollY, [0, 600, 800, 1200], [0, 1, 1, 0]);
+  const textY = useTransform(scrollY, [0, 600], [30, 0]);
+  const textX = useTransform(scrollY, [0, 600, 800, 1200], ["0vw", "0vw", "0vw", isDesktop ? "-50vw" : "-100vw"]);
+  
+  const avatarX = useTransform(scrollY, [0, 600, 800, 1200], [isDesktop ? "-40vw" : "0vw", "0vw", "0vw", isDesktop ? "50vw" : "100vw"]);
+  const avatarOpacity = useTransform(scrollY, [0, 600, 800, 1200], [1, 1, 1, 0]);
+  
+  const welcomeOpacity = useTransform(scrollY, [0, 600], [1, 0]);
+  const welcomePointerEvents = useTransform(scrollY, [0, 100], ["auto", "none"]);
+
+  const [welcomeIndex, setWelcomeIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWelcomeIndex((prev) => (prev + 1) % WELCOME_GREETINGS.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
 
   /* Typing effect */
   useEffect(() => {
@@ -53,8 +95,9 @@ export default function Hero({ scrollTo }) {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center overflow-hidden pt-20"
+      className="relative h-[200vh]"
     >
+      <div className="sticky top-0 w-full flex h-screen items-center overflow-hidden pt-20">
       {/* Background gradient effects */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-accent/5 blur-[120px]" />
@@ -66,9 +109,7 @@ export default function Hero({ scrollTo }) {
         <div className="grid min-h-[calc(100vh-5rem)] items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left — Text Content */}
           <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
+            style={{ opacity: textOpacity, y: textY, x: textX }}
             className="order-2 text-center lg:order-1 lg:text-left"
           >
             {/* Greeting badge */}
@@ -129,14 +170,36 @@ export default function Hero({ scrollTo }) {
             </motion.div>
           </motion.div>
 
-          {/* Right — Floating Illustration / Avatar */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
-            className="order-1 flex items-center justify-center lg:order-2"
-          >
-            <div className="relative">
+          {/* Right — Floating Illustration / Avatar & Welcome Text */}
+          <div className="order-1 flex items-center justify-center lg:order-2 relative w-full h-full min-h-[300px]">
+            {/* Welcome Text Overlay */}
+            <motion.div
+              style={{ opacity: welcomeOpacity, pointerEvents: welcomePointerEvents }}
+              className="absolute inset-0 flex flex-col items-center justify-center text-center z-10"
+            >
+              <div className="h-20 flex items-center justify-center overflow-hidden">
+                <AnimatePresence mode="wait">
+                  <motion.h2
+                    key={welcomeIndex}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5 }}
+                    className="text-4xl sm:text-5xl lg:text-6xl font-bold text-neutral-white"
+                  >
+                    {WELCOME_GREETINGS[welcomeIndex]}
+                  </motion.h2>
+                </AnimatePresence>
+              </div>
+              <p className="mt-4 text-lg sm:text-xl text-neutral-gray animate-pulse">
+                Let's see beneath this
+              </p>
+            </motion.div>
+
+            <motion.div
+              style={{ x: avatarX, opacity: avatarOpacity }}
+              className="relative z-20"
+            >
               {/* Glow ring */}
               <div className="absolute inset-0 -m-6 rounded-full bg-gradient-to-br from-accent/20 via-surface/10 to-secondary/20 blur-2xl" />
 
@@ -171,10 +234,11 @@ export default function Hero({ scrollTo }) {
                 <div className="absolute -left-2 bottom-12 h-3 w-3 rounded-full bg-surface shadow-[0_0_10px_rgba(137,163,224,0.6)]" />
                 <div className="absolute -bottom-2 right-12 h-2.5 w-2.5 rounded-full bg-secondary shadow-[0_0_8px_rgba(243,168,189,0.6)]" />
               </motion.div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </Container>
+      </div>
     </section>
   );
 }
