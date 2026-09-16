@@ -7,7 +7,7 @@ import { EDUCATION } from '../../utils/data';
 import { fadeUp, staggerContainer } from '../../utils/animations';
 
 /**
- * Education card with timeline indicator and hover glow.
+ * Education card with neumorphic styling and timeline indicator.
  */
 function EducationCard({ item, index }) {
   return (
@@ -16,44 +16,34 @@ function EducationCard({ item, index }) {
       className="group relative"
     >
       {/* Timeline connector line */}
-      <div className="absolute left-6 top-0 bottom-0 w-px bg-border hidden md:block" style={{ backgroundColor: 'var(--border-color)' }} />
+      <div
+        className="absolute left-6 top-0 bottom-0 w-px hidden md:block"
+        style={{ backgroundColor: 'var(--border-color)' }}
+      />
 
       <div className="relative flex gap-4 md:gap-6">
-        {/* Timeline dot */}
-        <div className="relative z-10 hidden md:flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-accent/30 bg-card transition-all duration-300 group-hover:border-accent group-hover:shadow-[0_0_20px_rgba(61,164,158,0.3)]"
-          style={{ backgroundColor: 'var(--bg-card)' }}
+        {/* Timeline dot — neumorphic */}
+        <div
+          className="relative z-10 hidden md:flex h-12 w-12 shrink-0 items-center justify-center rounded-xl neu-btn transition-all duration-300"
         >
-          <HiAcademicCap className="text-accent text-lg" style={{ color: 'var(--accent-teal)' }} />
+          <HiAcademicCap className="text-lg" style={{ color: 'var(--accent-primary)' }} />
         </div>
 
-        {/* Card Content */}
+        {/* Card Content — neumorphic raised */}
         <div
-          className="flex-1 rounded-2xl border p-6 transition-all duration-500 hover:shadow-lg"
-          style={{
-            backgroundColor: 'var(--bg-card)',
-            borderColor: 'var(--border-color)',
-          }}
+          className="flex-1 rounded-2xl p-6 neu-raised transition-all duration-500"
           onMouseEnter={(e) => {
+            e.currentTarget.style.boxShadow = 'var(--shadow-raised-lg)';
             e.currentTarget.style.backgroundColor = 'var(--bg-card-hover)';
-            e.currentTarget.style.borderColor = 'var(--accent-teal)';
-            e.currentTarget.style.boxShadow = '0 0 30px rgba(61, 164, 158, 0.15)';
           }}
           onMouseLeave={(e) => {
+            e.currentTarget.style.boxShadow = 'var(--shadow-raised)';
             e.currentTarget.style.backgroundColor = 'var(--bg-card)';
-            e.currentTarget.style.borderColor = 'var(--border-color)';
-            e.currentTarget.style.boxShadow = 'none';
           }}
         >
-          {/* Degree badge */}
+          {/* Degree badge — neumorphic pill */}
           {item.degree && (
-            <span
-              className="mb-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold"
-              style={{
-                backgroundColor: 'rgba(61, 164, 158, 0.1)',
-                color: 'var(--accent-teal)',
-                border: '1px solid rgba(61, 164, 158, 0.2)',
-              }}
-            >
+            <span className="neu-pill mb-3">
               <HiStar className="text-xs" />
               {item.degree}
             </span>
@@ -61,7 +51,7 @@ function EducationCard({ item, index }) {
 
           {/* Institution */}
           <h3
-            className="mb-1 text-xl font-bold transition-colors duration-300 group-hover:text-accent"
+            className="mb-1 text-xl font-bold transition-colors duration-300"
             style={{ color: 'var(--text-primary)' }}
           >
             {item.institution}
@@ -71,7 +61,7 @@ function EducationCard({ item, index }) {
           {item.major && (
             <p
               className="mb-2 text-base font-medium"
-              style={{ color: 'var(--accent-blue)' }}
+              style={{ color: 'var(--accent-primary)' }}
             >
               {item.major}
             </p>
@@ -79,7 +69,10 @@ function EducationCard({ item, index }) {
 
           {/* Year */}
           {item.year && (
-            <div className="mb-3 flex items-center gap-1.5 text-sm" style={{ color: 'var(--text-secondary)' }}>
+            <div
+              className="mb-3 flex items-center gap-1.5 text-sm"
+              style={{ color: 'var(--text-secondary)' }}
+            >
               <HiCalendar className="text-sm" />
               <span>{item.year}</span>
             </div>
@@ -87,23 +80,20 @@ function EducationCard({ item, index }) {
 
           {/* Description */}
           {item.description && (
-            <p className="mb-3 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            <p
+              className="mb-3 text-sm leading-relaxed"
+              style={{ color: 'var(--text-secondary)' }}
+            >
               {item.description}
             </p>
           )}
 
-          {/* GPA badge */}
+          {/* GPA badge — neumorphic pill */}
           {item.gpa && (
-            <div className="inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-semibold"
-              style={{
-                backgroundColor: 'rgba(243, 168, 189, 0.1)',
-                color: 'var(--accent-pink)',
-                border: '1px solid rgba(243, 168, 189, 0.2)',
-              }}
-            >
+            <span className="neu-pill">
               <span>IPK:</span>
-              <span>{item.gpa}</span>
-            </div>
+              <span className="font-semibold">{item.gpa}</span>
+            </span>
           )}
         </div>
       </div>
@@ -112,7 +102,7 @@ function EducationCard({ item, index }) {
 }
 
 /**
- * Education section — "Pendidikan Terakhir" with timeline cards.
+ * Education section — "Pendidikan Terakhir" with neumorphic timeline cards.
  */
 export default function Education() {
   const [ref, inView] = useInView({
@@ -124,15 +114,15 @@ export default function Education() {
 
   return (
     <section id="education" className="relative py-20 lg:py-28">
-      {/* Background decoration */}
+      {/* Background decoration — grayscale */}
       <div className="absolute inset-0 -z-10">
         <div
           className="absolute top-1/3 right-1/4 h-80 w-80 rounded-full blur-[150px]"
-          style={{ backgroundColor: 'rgba(137, 163, 224, 0.08)' }}
+          style={{ backgroundColor: 'rgba(154, 154, 164, 0.04)' }}
         />
         <div
           className="absolute bottom-1/4 left-1/3 h-64 w-64 rounded-full blur-[120px]"
-          style={{ backgroundColor: 'rgba(243, 168, 189, 0.06)' }}
+          style={{ backgroundColor: 'rgba(192, 192, 200, 0.03)' }}
         />
       </div>
 

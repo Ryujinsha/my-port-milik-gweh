@@ -3,7 +3,7 @@ import { useInView } from 'react-intersection-observer';
 import { fadeUp } from '../../utils/animations';
 
 /**
- * Consistent section heading with accent underline animation.
+ * Consistent section heading with neumorphic accent underline animation.
  */
 export default function SectionTitle({ title, subtitle, className = '' }) {
   const [ref, inView] = useInView({
@@ -20,14 +20,25 @@ export default function SectionTitle({ title, subtitle, className = '' }) {
       className={`mb-12 text-center md:mb-16 ${className}`}
     >
       {subtitle && (
-        <span className="mb-3 inline-block text-sm font-medium tracking-widest text-accent uppercase">
+        <span
+          className="mb-3 inline-block text-sm font-medium tracking-widest uppercase"
+          style={{ color: 'var(--accent-secondary)' }}
+        >
           {subtitle}
         </span>
       )}
-      <h2 className="text-3xl font-bold text-neutral-white sm:text-4xl lg:text-5xl">
+      <h2
+        className="text-3xl font-bold sm:text-4xl lg:text-5xl"
+        style={{ color: 'var(--text-primary)' }}
+      >
         {title}
       </h2>
-      <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-accent" />
+      <div
+        className="mx-auto mt-4 h-1 w-16 rounded-full"
+        style={{
+          background: 'linear-gradient(90deg, var(--accent-secondary), var(--accent-highlight))',
+        }}
+      />
     </motion.div>
   );
 }

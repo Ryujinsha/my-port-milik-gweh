@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
 /**
- * Reusable button component with primary and secondary variants.
+ * Reusable neumorphic button component with primary and secondary variants.
  */
 export default function Button({
   children,
@@ -14,13 +14,13 @@ export default function Button({
   ...props
 }) {
   const baseStyles =
-    'inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-darker cursor-pointer';
+    'inline-flex items-center justify-center gap-2 rounded-2xl px-7 py-3.5 text-sm font-semibold tracking-wide transition-all duration-300 focus:outline-none cursor-pointer';
 
   const variants = {
     primary:
-      'bg-accent text-neutral-white hover:bg-accent-light hover:shadow-[0_0_30px_rgba(54,173,163,0.4)] active:scale-[0.97]',
+      'neu-btn text-neutral-white hover:text-accent-light active:shadow-[inset_3px_3px_6px_var(--neu-shadow-dark),inset_-3px_-3px_6px_var(--neu-shadow-light)]',
     secondary:
-      'border-2 border-accent/40 text-accent hover:border-accent hover:bg-accent/10 active:scale-[0.97]',
+      'neu-flat text-neutral-gray hover:bg-card-hover hover:text-neutral-white active:shadow-[inset_2px_2px_4px_var(--neu-shadow-dark),inset_-2px_-2px_4px_var(--neu-shadow-light)]',
   };
 
   const motionProps = {

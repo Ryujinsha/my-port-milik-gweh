@@ -7,7 +7,7 @@ import { useScrollPosition } from '../../hooks/useScrollPosition';
 import { fadeDown } from '../../utils/animations';
 
 /**
- * Sticky header with blur-on-scroll, desktop nav, and mobile hamburger menu.
+ * Sticky header with neumorphic styling on scroll, desktop nav, and mobile hamburger menu.
  */
 export default function Header({ scrollTo, onChatToggle, isChatOpen }) {
   const { isScrolled } = useScrollPosition();
@@ -54,7 +54,7 @@ export default function Header({ scrollTo, onChatToggle, isChatOpen }) {
       animate="visible"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'glass shadow-lg shadow-primary/10'
+          ? 'neu-raised-sm'
           : 'bg-transparent'
       }`}
     >
@@ -64,14 +64,18 @@ export default function Header({ scrollTo, onChatToggle, isChatOpen }) {
           <a
             href="#hero"
             onClick={(e) => handleNavClick(e, '#hero')}
-            className="group flex items-center gap-2 text-xl font-bold text-neutral-white transition-colors"
+            className="group flex items-center gap-2 text-xl font-bold transition-colors"
+            style={{ color: 'var(--text-primary)' }}
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-sm font-extrabold text-neutral-white transition-all duration-300 group-hover:glow-accent">
+            <span
+              className="neu-btn flex h-9 w-9 items-center justify-center rounded-xl text-sm font-extrabold transition-all duration-300"
+              style={{ color: 'var(--accent-highlight)' }}
+            >
               {PERSONAL_INFO.firstName[0]}
             </span>
             <span className="hidden sm:inline">
               {PERSONAL_INFO.firstName}
-              <span className="text-accent">.</span>
+              <span style={{ color: 'var(--accent-primary)' }}>.</span>
             </span>
           </a>
 
@@ -84,16 +88,22 @@ export default function Header({ scrollTo, onChatToggle, isChatOpen }) {
                   onClick={(e) => handleNavClick(e, link.href)}
                   className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 ${
                     activeSection === link.href
-                      ? 'text-accent'
-                      : 'text-neutral-gray hover:text-neutral-white'
+                      ? ''
+                      : 'hover:text-neutral-white'
                   }`}
+                  style={{
+                    color: activeSection === link.href
+                      ? 'var(--accent-highlight)'
+                      : 'var(--text-secondary)',
+                  }}
                 >
                   {link.label}
                   {/* Active indicator underline */}
                   {activeSection === link.href && (
                     <motion.span
                       layoutId="nav-indicator"
-                      className="absolute bottom-0 left-1/2 h-0.5 w-6 -translate-x-1/2 rounded-full bg-accent"
+                      className="absolute bottom-0 left-1/2 h-0.5 w-6 -translate-x-1/2 rounded-full"
+                      style={{ background: 'var(--accent-primary)' }}
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -111,9 +121,10 @@ export default function Header({ scrollTo, onChatToggle, isChatOpen }) {
               whileTap={{ scale: 0.95 }}
               className={`flex h-10 w-10 items-center justify-center rounded-xl transition-all duration-300 ${
                 isChatOpen
-                  ? 'bg-accent text-white shadow-[0_0_20px_rgba(54,173,163,0.4)]'
-                  : 'border border-accent/30 text-accent hover:bg-accent/10'
+                  ? 'neu-inset-sm'
+                  : 'neu-btn'
               }`}
+              style={{ color: isChatOpen ? 'var(--accent-highlight)' : 'var(--accent-secondary)' }}
               aria-label={isChatOpen ? 'Close chatbot' : 'Open chatbot'}
               title="AI Assistant"
             >
@@ -124,7 +135,8 @@ export default function Header({ scrollTo, onChatToggle, isChatOpen }) {
             <button
               type="button"
               onClick={() => setIsMobileOpen(!isMobileOpen)}
-              className="flex h-10 w-10 items-center justify-center rounded-lg text-neutral-white transition-colors hover:bg-white/10 md:hidden"
+              className="neu-btn flex h-10 w-10 items-center justify-center rounded-lg transition-colors md:hidden"
+              style={{ color: 'var(--text-primary)' }}
               aria-label={isMobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileOpen}
             >
@@ -142,9 +154,10 @@ export default function Header({ scrollTo, onChatToggle, isChatOpen }) {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="overflow-hidden border-t border-white/5 md:hidden"
+            className="overflow-hidden md:hidden"
+            style={{ borderTop: '1px solid var(--border-color)' }}
           >
-            <div className="glass px-4 pb-6 pt-4">
+            <div className="neu-raised px-4 pb-6 pt-4">
               <ul className="space-y-1">
                 {NAV_LINKS.map((link, i) => (
                   <motion.li
@@ -156,11 +169,12 @@ export default function Header({ scrollTo, onChatToggle, isChatOpen }) {
                     <a
                       href={link.href}
                       onClick={(e) => handleNavClick(e, link.href)}
-                      className={`block rounded-lg px-4 py-3 text-base font-medium transition-colors ${
-                        activeSection === link.href
-                          ? 'bg-accent/10 text-accent'
-                          : 'text-neutral-gray hover:bg-white/5 hover:text-neutral-white'
-                      }`}
+                      className="block rounded-xl px-4 py-3 text-base font-medium transition-all duration-300"
+                      style={{
+                        color: activeSection === link.href ? 'var(--accent-highlight)' : 'var(--text-secondary)',
+                        background: activeSection === link.href ? 'var(--bg-main)' : 'transparent',
+                        boxShadow: activeSection === link.href ? 'var(--shadow-inset-sm)' : 'none',
+                      }}
                     >
                       {link.label}
                     </a>

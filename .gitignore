@@ -26,5 +26,3 @@ yarn-error.*
 
 agentic-chat.md
 web-requirement.md
-src/utils/chatbot.js
-src/utils/data.js

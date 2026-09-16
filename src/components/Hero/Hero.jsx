@@ -19,6 +19,7 @@ const WELCOME_GREETINGS = [
 
 /**
  * Hero section with typing effect, stagger animations, and floating illustration.
+ * Neumorphism grayscale theme.
  */
 export default function Hero({ scrollTo }) {
   const [titleIndex, setTitleIndex] = useState(0);
@@ -35,10 +36,7 @@ export default function Hero({ scrollTo }) {
 
   const { scrollY } = useScroll();
   
-  // Scroll animation phases:
-  // Phase 1 (0-600px): Welcome fades out, Avatar moves from left to center, Text fades in.
-  // Pause (600-800px): Intro stays visible.
-  // Phase 2 (800-1200px): "Opening gate" effect. Text moves left and fades out, Avatar moves right and fades out.
+  // Scroll animation phases
   const textOpacity = useTransform(scrollY, [0, 600, 800, 1200], [0, 1, 1, 0]);
   const textY = useTransform(scrollY, [0, 600], [30, 0]);
   const textX = useTransform(scrollY, [0, 600, 800, 1200], ["0vw", "0vw", "0vw", isDesktop ? "-50vw" : "-100vw"]);
@@ -98,11 +96,20 @@ export default function Hero({ scrollTo }) {
       className="relative h-[200vh]"
     >
       <div className="sticky top-0 w-full flex h-screen items-center overflow-hidden pt-20">
-      {/* Background gradient effects */}
+      {/* Background — subtle grayscale gradients */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-accent/5 blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 h-80 w-80 rounded-full bg-secondary/20 blur-[100px]" />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
+        <div
+          className="absolute top-1/4 left-1/4 h-96 w-96 rounded-full blur-[120px]"
+          style={{ backgroundColor: 'rgba(192, 192, 200, 0.04)' }}
+        />
+        <div
+          className="absolute bottom-1/4 right-1/4 h-80 w-80 rounded-full blur-[100px]"
+          style={{ backgroundColor: 'rgba(154, 154, 164, 0.06)' }}
+        />
+        <div
+          className="absolute top-0 left-0 right-0 h-px"
+          style={{ background: 'linear-gradient(to right, transparent, rgba(192, 192, 200, 0.1), transparent)' }}
+        />
       </div>
 
       <Container>
@@ -112,10 +119,13 @@ export default function Hero({ scrollTo }) {
             style={{ opacity: textOpacity, y: textY, x: textX }}
             className="order-2 text-center lg:order-1 lg:text-left"
           >
-            {/* Greeting badge */}
+            {/* Greeting badge — neumorphic inset pill */}
             <motion.div variants={fadeUp} className="mb-6">
-              <span className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-4 py-1.5 text-sm font-medium text-accent">
-                <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-accent" />
+              <span className="neu-pill">
+                <span
+                  className="inline-block h-2 w-2 animate-pulse rounded-full"
+                  style={{ backgroundColor: 'var(--accent-primary)' }}
+                />
                 Available for work
               </span>
             </motion.div>
@@ -123,7 +133,8 @@ export default function Hero({ scrollTo }) {
             {/* Name */}
             <motion.h1
               variants={fadeUp}
-              className="mb-4 text-4xl font-extrabold leading-tight text-neutral-white sm:text-5xl lg:text-6xl xl:text-7xl"
+              className="mb-4 text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl xl:text-7xl"
+              style={{ color: 'var(--text-primary)' }}
             >
               {PERSONAL_INFO.greeting}{' '}
               <span className="gradient-text">{PERSONAL_INFO.name}</span>
@@ -131,9 +142,15 @@ export default function Hero({ scrollTo }) {
 
             {/* Typing Effect Title */}
             <motion.div variants={fadeUp} className="mb-6 h-10">
-              <p className="text-xl font-medium text-neutral-gray sm:text-2xl">
+              <p
+                className="text-xl font-medium sm:text-2xl"
+                style={{ color: 'var(--text-secondary)' }}
+              >
                 {displayedText}
-                <span className="ml-0.5 inline-block w-[3px] animate-pulse bg-accent text-transparent">
+                <span
+                  className="ml-0.5 inline-block w-[3px] animate-pulse text-transparent"
+                  style={{ backgroundColor: 'var(--accent-primary)' }}
+                >
                   |
                 </span>
               </p>
@@ -142,7 +159,8 @@ export default function Hero({ scrollTo }) {
             {/* Description */}
             <motion.p
               variants={fadeUp}
-              className="mx-auto mb-8 max-w-lg text-base leading-relaxed text-neutral-gray lg:mx-0 lg:text-lg"
+              className="mx-auto mb-8 max-w-lg text-base leading-relaxed lg:mx-0 lg:text-lg"
+              style={{ color: 'var(--text-secondary)' }}
             >
               {PERSONAL_INFO.description}
             </motion.p>
@@ -185,13 +203,17 @@ export default function Hero({ scrollTo }) {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.5 }}
-                    className="text-4xl sm:text-5xl lg:text-6xl font-bold text-neutral-white"
+                    className="text-4xl sm:text-5xl lg:text-6xl font-bold"
+                    style={{ color: 'var(--text-primary)' }}
                   >
                     {WELCOME_GREETINGS[welcomeIndex]}
                   </motion.h2>
                 </AnimatePresence>
               </div>
-              <p className="mt-4 text-lg sm:text-xl text-neutral-gray animate-pulse">
+              <p
+                className="mt-4 text-lg sm:text-xl animate-pulse"
+                style={{ color: 'var(--text-secondary)' }}
+              >
                 Let's see beneath this
               </p>
             </motion.div>
@@ -200,18 +222,34 @@ export default function Hero({ scrollTo }) {
               style={{ x: avatarX, opacity: avatarOpacity }}
               className="relative z-20"
             >
-              {/* Glow ring */}
-              <div className="absolute inset-0 -m-6 rounded-full bg-gradient-to-br from-accent/20 via-surface/10 to-secondary/20 blur-2xl" />
+              {/* Glow ring — grayscale */}
+              <div
+                className="absolute inset-0 -m-6 rounded-full blur-2xl"
+                style={{
+                  background: 'radial-gradient(circle, rgba(192,192,200,0.08) 0%, rgba(154,154,164,0.04) 50%, transparent 70%)',
+                }}
+              />
 
               {/* Floating character */}
               <motion.div
                 animate={floatingAnimation}
                 className="relative"
               >
-                {/* Circle background frame */}
-                <div className="relative h-64 w-64 overflow-hidden rounded-full border-2 border-accent/20 sm:h-80 sm:w-80 lg:h-96 lg:w-96">
-                  {/* Gradient circle background */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-surface" />
+                {/* Circle background frame — neumorphic */}
+                <div
+                  className="relative h-64 w-64 overflow-hidden rounded-full sm:h-80 sm:w-80 lg:h-96 lg:w-96"
+                  style={{
+                    boxShadow: 'var(--shadow-raised-lg)',
+                    border: '2px solid rgba(192, 192, 200, 0.1)',
+                  }}
+                >
+                  {/* Gradient circle background — grayscale */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: 'linear-gradient(135deg, #353540, #2a2a30, #303038)',
+                    }}
+                  />
                 </div>
 
                 {/* Character image — positioned over the circle, extending upward */}
@@ -219,9 +257,10 @@ export default function Hero({ scrollTo }) {
                   <div className="relative w-[110%] sm:w-[105%]" style={{ marginBottom: '-8%' }}>
                     <img
                       src="/MBG.png"
-                      alt="Firefly Character"
-                      className="w-full h-auto object-contain drop-shadow-[0_0_30px_rgba(61,164,158,0.3)]"
+                      alt="Character"
+                      className="w-full h-auto object-contain"
                       style={{
+                        filter: 'drop-shadow(0 0 30px rgba(192, 192, 200, 0.15))',
                         maskImage: 'linear-gradient(to bottom, black 55%, transparent 98%)',
                         WebkitMaskImage: 'linear-gradient(to bottom, black 55%, transparent 98%)',
                       }}
@@ -229,10 +268,28 @@ export default function Hero({ scrollTo }) {
                   </div>
                 </div>
 
-                {/* Decorative orbiting dots */}
-                <div className="absolute -right-3 top-8 h-4 w-4 rounded-full bg-accent shadow-[0_0_12px_rgba(61,164,158,0.6)]" />
-                <div className="absolute -left-2 bottom-12 h-3 w-3 rounded-full bg-surface shadow-[0_0_10px_rgba(137,163,224,0.6)]" />
-                <div className="absolute -bottom-2 right-12 h-2.5 w-2.5 rounded-full bg-secondary shadow-[0_0_8px_rgba(243,168,189,0.6)]" />
+                {/* Decorative orbiting dots — grayscale */}
+                <div
+                  className="absolute -right-3 top-8 h-4 w-4 rounded-full"
+                  style={{
+                    backgroundColor: 'var(--accent-primary)',
+                    boxShadow: '0 0 12px rgba(192, 192, 200, 0.4)',
+                  }}
+                />
+                <div
+                  className="absolute -left-2 bottom-12 h-3 w-3 rounded-full"
+                  style={{
+                    backgroundColor: 'var(--accent-secondary)',
+                    boxShadow: '0 0 10px rgba(154, 154, 164, 0.4)',
+                  }}
+                />
+                <div
+                  className="absolute -bottom-2 right-12 h-2.5 w-2.5 rounded-full"
+                  style={{
+                    backgroundColor: 'var(--accent-muted)',
+                    boxShadow: '0 0 8px rgba(110, 110, 120, 0.4)',
+                  }}
+                />
               </motion.div>
             </motion.div>
           </div>
