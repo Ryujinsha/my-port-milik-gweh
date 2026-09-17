@@ -25,6 +25,7 @@ export const NAV_LINKS = [
   { label: 'Education', href: '#education' },
   { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
+  { label: 'Designs', href: '#designs' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -39,7 +40,7 @@ export const EDUCATION = [
     degree: 'S1 (Sarjana)',
     year: '2024 - Sekarang',
     description: 'Mempelajari dasar-dasar ilmu komputer, pengembangan web, dan rekayasa perangkat lunak.',
-    gpa: '3.95',
+    gpa: '3.75',
   },
   {
     id: 2,
@@ -140,6 +141,44 @@ export const PROJECTS = [
     demo: 'https://example.com',
     color: '#2F578A',
   }
+];
+
+// ===========================
+// Design Gallery
+// ===========================
+export const DESIGNS = [
+  {
+    id: 1,
+    title: 'Poster Design 1',
+    category: 'Poster',
+    image: '', // Tambahkan path gambar kamu di sini, contoh: '/designs/poster1.jpg'
+    description: 'Desain poster pertama.',
+    placeholderSeed: '180,180,190',
+  },
+  {
+    id: 2,
+    title: 'Banner Design 1',
+    category: 'Banner',
+    image: '', // Tambahkan path gambar kamu di sini
+    description: 'Desain banner untuk media sosial.',
+    placeholderSeed: '150,150,160',
+  },
+  {
+    id: 3,
+    title: 'Social Media Post 1',
+    category: 'Social Media',
+    image: '', // Tambahkan path gambar kamu di sini
+    description: 'Desain post Instagram.',
+    placeholderSeed: '130,130,140',
+  },
+  {
+    id: 4,
+    title: 'Poster Design 2',
+    category: 'Poster',
+    image: '', // Tambahkan path gambar kamu di sini
+    description: 'Desain poster kedua.',
+    placeholderSeed: '170,170,180',
+  },
 ];
 
 // ===========================

@@ -69,6 +69,8 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -77,6 +79,15 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Mobile-specific viewport adjustments */
+@supports (height: 100dvh) {
+  .h-screen {
+    height: 100dvh;
+  }
 }
 
 ::selection {

@@ -80,7 +80,7 @@ export default function Header({ scrollTo, onChatToggle, isChatOpen }) {
           </a>
 
           {/* Desktop Navigation */}
-          <ul className="hidden items-center gap-1 md:flex">
+          <ul className="hidden items-center gap-1 lg:flex">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <a
@@ -135,7 +135,7 @@ export default function Header({ scrollTo, onChatToggle, isChatOpen }) {
             <button
               type="button"
               onClick={() => setIsMobileOpen(!isMobileOpen)}
-              className="neu-btn flex h-10 w-10 items-center justify-center rounded-lg transition-colors md:hidden"
+              className="neu-btn flex h-10 w-10 items-center justify-center rounded-lg transition-colors lg:hidden"
               style={{ color: 'var(--text-primary)' }}
               aria-label={isMobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileOpen}
@@ -154,7 +154,7 @@ export default function Header({ scrollTo, onChatToggle, isChatOpen }) {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="overflow-hidden md:hidden"
+            className="overflow-hidden lg:hidden"
             style={{ borderTop: '1px solid var(--border-color)' }}
           >
             <div className="neu-raised px-4 pb-6 pt-4">

@@ -5,7 +5,7 @@ import { chatbotService } from '../../utils/chatbot';
 import { PERSONAL_INFO } from '../../utils/data';
 
 /**
- * Floating chatbot panel with Gemini AI integration.
+ * Floating chatbot panel with neumorphic grayscale styling and Gemini AI integration.
  */
 export default function Chatbot({ isOpen, onClose }) {
   const [messages, setMessages] = useState([
@@ -90,32 +90,47 @@ export default function Chatbot({ isOpen, onClose }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm md:hidden"
+            className="fixed inset-0 z-[60] md:hidden"
+            style={{ backgroundColor: 'rgba(30, 30, 34, 0.6)', backdropFilter: 'blur(4px)' }}
           />
 
-          {/* Chat Panel */}
+          {/* Chat Panel — neumorphic raised */}
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed bottom-4 right-4 z-[70] flex h-[min(600px,85vh)] w-[min(420px,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-white/10 bg-neutral-darker shadow-2xl shadow-black/40"
+            className="fixed bottom-4 right-4 z-[70] flex h-[min(600px,85vh)] w-[min(420px,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl neu-raised-lg"
           >
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-white/10 px-4 py-3" style={{ backgroundColor: 'var(--bg-card)' }}>
+            <div
+              className="flex items-center justify-between px-4 py-3"
+              style={{
+                backgroundColor: 'var(--bg-card)',
+                borderBottom: '1px solid var(--border-color)',
+              }}
+            >
               <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent text-sm font-bold text-white">
+                <div
+                  className="neu-inset-sm flex h-9 w-9 items-center justify-center rounded-xl text-sm font-bold"
+                  style={{ color: 'var(--accent-highlight)' }}
+                >
                   <HiSparkles size={18} />
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-white">AI Assistant</h3>
-                  <p className="text-xs text-neutral-gray">Powered by Gemini</p>
+                  <h3 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+                    AI Assistant
+                  </h3>
+                  <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+                    Powered by Gemini
+                  </p>
                 </div>
               </div>
               <div className="flex items-center gap-1">
                 <button
                   onClick={handleClear}
-                  className="flex h-8 w-8 items-center justify-center rounded-lg text-neutral-gray transition-colors hover:bg-white/10 hover:text-white"
+                  className="neu-btn flex h-8 w-8 items-center justify-center rounded-lg transition-colors"
+                  style={{ color: 'var(--text-secondary)' }}
                   aria-label="Clear chat"
                   title="Clear chat"
                 >
@@ -123,7 +138,8 @@ export default function Chatbot({ isOpen, onClose }) {
                 </button>
                 <button
                   onClick={onClose}
-                  className="flex h-8 w-8 items-center justify-center rounded-lg text-neutral-gray transition-colors hover:bg-white/10 hover:text-white"
+                  className="neu-btn flex h-8 w-8 items-center justify-center rounded-lg transition-colors"
+                  style={{ color: 'var(--text-secondary)' }}
                   aria-label="Close chat"
                 >
                   <HiX size={18} />
@@ -132,7 +148,10 @@ export default function Chatbot({ isOpen, onClose }) {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
+            <div
+              className="flex-1 overflow-y-auto px-4 py-4 space-y-3"
+              style={{ backgroundColor: 'var(--bg-main)' }}
+            >
               {messages.map((msg) => (
                 <motion.div
                   key={msg.id}
@@ -144,9 +163,22 @@ export default function Chatbot({ isOpen, onClose }) {
                   <div
                     className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
                       msg.role === 'user'
-                        ? 'rounded-br-md bg-accent text-white'
-                        : 'rounded-bl-md border border-white/5 bg-white/5 text-neutral-light'
+                        ? 'rounded-br-md'
+                        : 'rounded-bl-md'
                     }`}
+                    style={
+                      msg.role === 'user'
+                        ? {
+                            background: 'var(--bg-card)',
+                            boxShadow: 'var(--shadow-raised-sm)',
+                            color: 'var(--text-primary)',
+                          }
+                        : {
+                            background: 'var(--bg-main)',
+                            boxShadow: 'var(--shadow-inset-sm)',
+                            color: 'var(--text-secondary)',
+                          }
+                    }
                   >
                     <p className="whitespace-pre-wrap">{msg.text}</p>
                   </div>
@@ -160,11 +192,26 @@ export default function Chatbot({ isOpen, onClose }) {
                   animate={{ opacity: 1, y: 0 }}
                   className="flex justify-start"
                 >
-                  <div className="rounded-2xl rounded-bl-md border border-white/5 bg-white/5 px-4 py-3">
+                  <div
+                    className="rounded-2xl rounded-bl-md px-4 py-3"
+                    style={{
+                      background: 'var(--bg-main)',
+                      boxShadow: 'var(--shadow-inset-sm)',
+                    }}
+                  >
                     <div className="flex items-center gap-1.5">
-                      <span className="h-2 w-2 animate-bounce rounded-full bg-accent [animation-delay:0ms]" />
-                      <span className="h-2 w-2 animate-bounce rounded-full bg-accent [animation-delay:150ms]" />
-                      <span className="h-2 w-2 animate-bounce rounded-full bg-accent [animation-delay:300ms]" />
+                      <span
+                        className="h-2 w-2 animate-bounce rounded-full [animation-delay:0ms]"
+                        style={{ backgroundColor: 'var(--accent-primary)' }}
+                      />
+                      <span
+                        className="h-2 w-2 animate-bounce rounded-full [animation-delay:150ms]"
+                        style={{ backgroundColor: 'var(--accent-primary)' }}
+                      />
+                      <span
+                        className="h-2 w-2 animate-bounce rounded-full [animation-delay:300ms]"
+                        style={{ backgroundColor: 'var(--accent-primary)' }}
+                      />
                     </div>
                   </div>
                 </motion.div>
@@ -173,8 +220,14 @@ export default function Chatbot({ isOpen, onClose }) {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Input Area */}
-            <div className="border-t border-white/10 bg-neutral-darker/80 p-3">
+            {/* Input Area — neumorphic */}
+            <div
+              className="p-3"
+              style={{
+                backgroundColor: 'var(--bg-card)',
+                borderTop: '1px solid var(--border-color)',
+              }}
+            >
               <div className="flex items-end gap-2">
                 <textarea
                   ref={inputRef}
@@ -184,7 +237,7 @@ export default function Chatbot({ isOpen, onClose }) {
                   placeholder="Ask me anything..."
                   rows={1}
                   disabled={isLoading}
-                  className="flex-1 resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-neutral-gray/50 transition-colors focus:border-accent/50 focus:outline-none focus:ring-1 focus:ring-accent/20 disabled:opacity-50"
+                  className="neu-input flex-1 resize-none rounded-xl px-4 py-2.5 text-sm disabled:opacity-50"
                   style={{ maxHeight: '120px' }}
                   onInput={(e) => {
                     e.target.style.height = 'auto';
@@ -194,7 +247,8 @@ export default function Chatbot({ isOpen, onClose }) {
                 <button
                   onClick={handleSend}
                   disabled={!input.trim() || isLoading}
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent text-white transition-all hover:bg-accent-light disabled:cursor-not-allowed disabled:opacity-40"
+                  className="neu-btn flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-all disabled:cursor-not-allowed disabled:opacity-40"
+                  style={{ color: 'var(--accent-highlight)' }}
                   aria-label="Send message"
                 >
                   <HiPaperAirplane size={16} className="rotate-90" />

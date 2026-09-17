@@ -24,7 +24,7 @@ const FORM_STATUS = {
 };
 
 /**
- * Contact section with form + social links.
+ * Contact section with neumorphic form + social links.
  */
 export default function Contact() {
   const formRef = useRef(null);
@@ -64,15 +64,18 @@ export default function Contact() {
     }
   };
 
-  const inputStyles =
-    'w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-neutral-white placeholder:text-neutral-gray/50 transition-all duration-300 focus:border-accent/50 focus:bg-white/8 focus:outline-none focus:ring-2 focus:ring-accent/20';
-
   return (
     <section id="contact" className="relative py-20 lg:py-28">
-      {/* Background glow */}
+      {/* Background — grayscale glow */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-accent/5 blur-[120px]" />
-        <div className="absolute top-1/3 right-1/4 h-64 w-64 rounded-full bg-primary/10 blur-[100px]" />
+        <div
+          className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full blur-[120px]"
+          style={{ backgroundColor: 'rgba(192, 192, 200, 0.03)' }}
+        />
+        <div
+          className="absolute top-1/3 right-1/4 h-64 w-64 rounded-full blur-[100px]"
+          style={{ backgroundColor: 'rgba(154, 154, 164, 0.04)' }}
+        />
       </div>
 
       <Container>
@@ -90,17 +93,23 @@ export default function Contact() {
         >
           {/* Left — Info */}
           <motion.div variants={slideInLeft} className="flex flex-col justify-center">
-            <h3 className="mb-4 text-2xl font-bold text-neutral-white sm:text-3xl">
+            <h3
+              className="mb-4 text-2xl font-bold sm:text-3xl"
+              style={{ color: 'var(--text-primary)' }}
+            >
               Let&apos;s work{' '}
               <span className="gradient-text">together</span>
             </h3>
-            <p className="mb-8 max-w-md text-base leading-relaxed text-neutral-gray">
+            <p
+              className="mb-8 max-w-md text-base leading-relaxed"
+              style={{ color: 'var(--text-secondary)' }}
+            >
               Have a project in mind or just want to say hi? Feel free to reach
               out. I&apos;m always open to discussing new opportunities and
               creative ideas.
             </p>
 
-            {/* Social Links */}
+            {/* Social Links — neumorphic raised circles */}
             <div className="flex items-center gap-3">
               {SOCIAL_LINKS.map((link) => {
                 const Icon = ICON_MAP[link.icon];
@@ -112,7 +121,8 @@ export default function Contact() {
                     rel={link.icon !== 'email' ? 'noopener noreferrer' : undefined}
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-neutral-gray transition-all duration-300 hover:border-accent/40 hover:bg-accent/10 hover:text-accent"
+                    className="neu-btn flex h-11 w-11 items-center justify-center rounded-xl transition-all duration-300"
+                    style={{ color: 'var(--accent-primary)' }}
                     aria-label={link.label}
                   >
                     <Icon size={18} />
@@ -122,15 +132,19 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* Right — Form */}
+          {/* Right — Form — neumorphic raised card */}
           <motion.div variants={slideInRight}>
             <form
               ref={formRef}
               onSubmit={handleSubmit}
-              className="glass-surface space-y-5 rounded-2xl p-6 sm:p-8"
+              className="neu-raised space-y-5 rounded-2xl p-6 sm:p-8"
             >
               <div>
-                <label htmlFor="contact-name" className="mb-1.5 block text-sm font-medium text-neutral-gray">
+                <label
+                  htmlFor="contact-name"
+                  className="mb-1.5 block text-sm font-medium"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
                   Name
                 </label>
                 <input
@@ -141,12 +155,16 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   placeholder="Your name"
-                  className={inputStyles}
+                  className="neu-input w-full rounded-xl px-4 py-3.5 text-sm"
                 />
               </div>
 
               <div>
-                <label htmlFor="contact-email" className="mb-1.5 block text-sm font-medium text-neutral-gray">
+                <label
+                  htmlFor="contact-email"
+                  className="mb-1.5 block text-sm font-medium"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
                   Email
                 </label>
                 <input
@@ -157,12 +175,16 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   placeholder="your@email.com"
-                  className={inputStyles}
+                  className="neu-input w-full rounded-xl px-4 py-3.5 text-sm"
                 />
               </div>
 
               <div>
-                <label htmlFor="contact-message" className="mb-1.5 block text-sm font-medium text-neutral-gray">
+                <label
+                  htmlFor="contact-message"
+                  className="mb-1.5 block text-sm font-medium"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
                   Message
                 </label>
                 <textarea
@@ -173,7 +195,7 @@ export default function Contact() {
                   required
                   rows={5}
                   placeholder="Tell me about your project..."
-                  className={`${inputStyles} resize-none`}
+                  className="neu-input w-full rounded-xl px-4 py-3.5 text-sm resize-none"
                 />
               </div>
 
@@ -183,7 +205,10 @@ export default function Contact() {
                 className="w-full"
                 icon={
                   status === FORM_STATUS.SENDING ? (
-                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                    <span
+                      className="h-4 w-4 animate-spin rounded-full border-2 border-t-white"
+                      style={{ borderColor: 'rgba(255,255,255,0.3)', borderTopColor: 'white' }}
+                    />
                   ) : status === FORM_STATUS.SUCCESS ? (
                     <FiCheck />
                   ) : status === FORM_STATUS.ERROR ? (

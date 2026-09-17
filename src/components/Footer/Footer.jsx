@@ -13,7 +13,7 @@ const ICON_MAP = {
 };
 
 /**
- * Footer with logo, copyright, tech stack, and social links.
+ * Footer with neumorphic logo, copyright, tech stack, and social links.
  */
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -24,9 +24,17 @@ export default function Footer() {
   });
 
   return (
-    <footer className="relative border-t border-white/5">
+    <footer
+      className="relative"
+      style={{ borderTop: '1px solid var(--border-color)' }}
+    >
       {/* Gradient fade from content */}
-      <div className="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
+      <div
+        className="absolute -top-px left-0 right-0 h-px"
+        style={{
+          background: 'linear-gradient(to right, transparent, rgba(192, 192, 200, 0.1), transparent)',
+        }}
+      />
 
       <Container>
         <motion.div
@@ -37,18 +45,25 @@ export default function Footer() {
           className="py-12 lg:py-16"
         >
           <div className="flex flex-col items-center gap-8">
-            {/* Logo */}
-            <a href="#hero" className="group flex items-center gap-2 text-xl font-bold text-neutral-white">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-sm font-extrabold text-neutral-white transition-all duration-300 group-hover:glow-accent">
+            {/* Logo — neumorphic */}
+            <a
+              href="#hero"
+              className="group flex items-center gap-2 text-xl font-bold"
+              style={{ color: 'var(--text-primary)' }}
+            >
+              <span
+                className="neu-btn flex h-9 w-9 items-center justify-center rounded-lg text-sm font-extrabold transition-all duration-300"
+                style={{ color: 'var(--accent-highlight)' }}
+              >
                 {PERSONAL_INFO.firstName[0]}
               </span>
               <span>
                 {PERSONAL_INFO.firstName}
-                <span className="text-accent">.</span>
+                <span style={{ color: 'var(--accent-primary)' }}>.</span>
               </span>
             </a>
 
-            {/* Social Links */}
+            {/* Social Links — neumorphic mini buttons */}
             <div className="flex items-center gap-3">
               {SOCIAL_LINKS.map((link) => {
                 const Icon = ICON_MAP[link.icon];
@@ -58,7 +73,8 @@ export default function Footer() {
                     href={link.href}
                     target={link.icon !== 'email' ? '_blank' : undefined}
                     rel={link.icon !== 'email' ? 'noopener noreferrer' : undefined}
-                    className="flex h-10 w-10 items-center justify-center rounded-lg text-neutral-gray transition-all duration-300 hover:bg-white/5 hover:text-accent"
+                    className="neu-btn flex h-10 w-10 items-center justify-center rounded-lg transition-all duration-300"
+                    style={{ color: 'var(--text-secondary)' }}
                     aria-label={link.label}
                   >
                     <Icon size={18} />
@@ -68,14 +84,24 @@ export default function Footer() {
             </div>
 
             {/* Tech Stack */}
-            <p className="flex items-center gap-1.5 text-sm text-neutral-gray">
-              Built with <FiHeart className="text-accent" size={14} /> using
-              <span className="font-medium text-neutral-white">React</span>+
-              <span className="font-medium text-neutral-white">Tailwind CSS</span>
+            <p
+              className="flex items-center gap-1.5 text-sm"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              Built with{' '}
+              <FiHeart size={14} style={{ color: 'var(--accent-primary)' }} />{' '}
+              using
+              <span className="font-medium" style={{ color: 'var(--text-primary)' }}>
+                React
+              </span>
+              +
+              <span className="font-medium" style={{ color: 'var(--text-primary)' }}>
+                Tailwind CSS
+              </span>
             </p>
 
             {/* Copyright */}
-            <p className="text-xs text-neutral-gray/60">
+            <p className="text-xs" style={{ color: 'var(--accent-muted)' }}>
               &copy; {currentYear} {PERSONAL_INFO.name}. All rights reserved.
             </p>
           </div>

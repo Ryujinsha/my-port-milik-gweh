@@ -3,6 +3,7 @@ import Hero from './components/Hero/Hero';
 import Education from './components/Education/Education';
 import Skills from './components/Skills/Skills';
 import Projects from './components/Projects/Projects';
+import DesignGallery from './components/DesignGallery/DesignGallery';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import Chatbot from './components/Chatbot/Chatbot';
@@ -28,6 +29,7 @@ export default function App() {
         <Education />
         <Skills />
         <Projects />
+        <DesignGallery />
         <Contact />
       </main>
       <Footer />

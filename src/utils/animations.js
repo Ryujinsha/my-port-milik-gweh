@@ -33,19 +33,6 @@ export const fadeDown = {
   },
 };
 
-export const fadeIn = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.5,
-      ease: 'easeOut',
-    },
-  },
-};
-
 export const slideInLeft = {
   hidden: {
     opacity: 0,
@@ -76,37 +63,12 @@ export const slideInRight = {
   },
 };
 
-export const scaleUp = {
-  hidden: {
-    opacity: 0,
-    scale: 0.9,
-  },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.5,
-      ease: 'easeOut',
-    },
-  },
-};
-
 export const staggerContainer = {
   hidden: {},
   visible: {
     transition: {
       staggerChildren: 0.1,
       delayChildren: 0.1,
-    },
-  },
-};
-
-export const staggerContainerSlow = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
     },
   },
 };
